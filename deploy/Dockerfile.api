@@ -1,0 +1,7 @@
+FROM node:20-alpine
+WORKDIR /app
+COPY . .
+RUN npm install -g pnpm && pnpm install --no-frozen-lockfile
+RUN pnpm --filter api build || true
+EXPOSE 4000
+CMD ["pnpm", "--filter", "api", "start"]
